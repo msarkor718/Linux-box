@@ -1,6 +1,5 @@
 #!/usr/local/bin/python
 #Marlon Sarkor
-#CS 356-102
 
 import sys
 import random
