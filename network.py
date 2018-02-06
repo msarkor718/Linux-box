@@ -1,24 +1,31 @@
 #!/usr/local/bin/python
+#Marlon Sarkor
+#CS 356-102
 
 import sys
+import random
 from socket import *
+import struct
 
-serverIP = '10.0.0.16' # any local IP address
-serverPort = 13000
+host = ''
+port = 13000
 dataLen = 1000000
-# Create a UDP socket. Notice the use of SOCK_DGRAM for UDP packets
-serverSocket = socket(AF_INET, SOCK_DGRAM)
 
-# Assign IP address and port number to socket
-serverSocket.bind((serverIP, serverPort))
-print('The server is ready to receive on port: ' + str(serverPort))
-# loop forever listening for incoming datagram messages
+# Build a socket
+sock = socket(AF_INET, SOCK_DGRAM)
+# Server IP and related port
+sock.bind((host, port))
+print('Server now listening on port ' + str(port))
+
 
 while True:
-# Receive and print the client data from "data" socket
-	data, address = serverSocket.recvfrom(dataLen)
-	print("Receive data from client " + address[0] + ", " + str(address[1]) + ": " + data.decode())
+	data, address = sock.recvfrom(dataLen)
+	print("Receive data from client " + address[0] + ", " + str(address[1]) + ": " +str(data))
 
-# Echo back to client
-	print("Sending data to client " + address[0] + ", " + str(address[1]) + ": " + data.decode())
-	serverSocket.sendto(data,address)
+# Send message back to client
+	if  random.randint(0,10) < 4:
+		print ("Message timed out")
+
+	else:
+		print("Sending data to client " + address[0] + ", " + str(address[1]) + ": " + str(data))
+		sock.sendto(data,address)
