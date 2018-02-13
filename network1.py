@@ -1,6 +1,4 @@
 #Marlon Sarkor
-#CS356
-#Assignment 1
 
 import sys, time
 from socket import *
